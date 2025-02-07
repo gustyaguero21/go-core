@@ -1,4 +1,4 @@
-module github.com/gustyaguero21/Go-Core
+module github.com/gustyaguero21/go-core
 
 go 1.23.4
 
