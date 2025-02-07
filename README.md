@@ -1,2 +1,2 @@
-# Go-Core
+# go-core
 go dependencies package
