@@ -10,6 +10,7 @@ on:
 
 jobs:
   test:
+    runs-on: ubuntu-latest  # Se agrega esta línea para evitar el error
     container: 
       image: golang:1.23
 
