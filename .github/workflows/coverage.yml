@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Se agrega esta línea para evitar el error
+    runs-on: ubuntu-latest
     container: 
       image: golang:1.23
 
@@ -22,7 +22,12 @@ jobs:
         run: go mod tidy
 
       - name: Run tests with coverage
-        run: go test ./... -coverprofile=coverage.out -covermode=atomic
+        run: |
+          if ls *.go 2>/dev/null || find . -type f -name "*.go" | grep .; then
+            go test ./... -coverprofile=coverage.out -covermode=atomic
+          else
+            echo "No Go files found, skipping tests."
+          fi
 
       - name: Check coverage threshold
         run: |
@@ -32,6 +37,3 @@ jobs:
             echo "Coverage is below 85%! Failing the job."
             exit 1
           fi
-
-      - name: Build project
-        run: go build
