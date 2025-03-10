@@ -14,6 +14,7 @@ type DatadogMetrics struct {
 
 func NewMetric(apiKey string) *DatadogMetrics {
 	client := datadog.NewClient(apiKey, "")
+	client.SetBaseUrl("https://api.datadoghq.com")
 	return &DatadogMetrics{
 		client: client,
 	}
