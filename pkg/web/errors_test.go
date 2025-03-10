@@ -7,13 +7,16 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gustyaguero21/go-core/pkg/metrics"
 )
 
 func TestNewError(t *testing.T) {
+	ddMetrics := metrics.NewMetric("fake_api_key")
+
 	r := gin.Default()
 
 	r.GET("/test-error", func(c *gin.Context) {
-		NewError(c, 400, "Bad Request")
+		NewError(c, 400, "Bad Request", ddMetrics, "error")
 	})
 
 	req, _ := http.NewRequest(http.MethodGet, "/test-error", nil)
