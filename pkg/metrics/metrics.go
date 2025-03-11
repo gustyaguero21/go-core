@@ -35,7 +35,7 @@ func (d *DatadogMetrics) RecordMetric(metricName string, statusCode int, duratio
 		},
 		Type: datadog.String("gauge"),
 	}
-
+	log.Printf("Enviando métrica a Datadog: %s con status %d", metricName, statusCode)
 	err := d.client.PostMetrics([]datadog.Metric{metric})
 	if err != nil {
 		log.Printf("Error sending metrics to Datadog: %v", err)
